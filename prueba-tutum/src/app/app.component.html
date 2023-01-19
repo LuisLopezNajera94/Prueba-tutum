@@ -1,0 +1,138 @@
+<div class="row">
+
+
+  <div class="col-sm-5">
+    <label>Alumnos</label>
+    <select class="form-select" [(ngModel)]="alumnoSeleccionado">
+      <option [ngValue]="alumno" *ngFor="let alumno of alumnos">{{alumno.nombre}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm-1">
+    <div class="mt-4">
+      <button type="button" class="btn btn-primary" (click)="getCalificaciones()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="col-sm-1">
+    <div class="mt-4">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Calificar</button>
+    </div>
+  </div>
+
+
+  <div class="row mt-5">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Materia</th>
+          <th scope="col">Calificacion</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Modificar</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let calificacion of calificaciones">
+          <td>{{calificacion.nombre}}</td>
+          <td>{{calificacion.apellido}}</td>
+          <td>{{calificacion.materia}}</td>
+          <td>{{calificacion.calificacion}}</td>
+          <td>{{calificacion.fecha_registro}}</td>
+          <td><button type="button" class="btn btn-warning" data-bs-toggle="modal"
+            data-bs-target="#exampleModal1"  (click)="modalCalificacion(calificacion)">Modificar</button></td>
+          <td><button type="button" class="btn btn-danger"
+              (click)="eliminarCalificacion(calificacion)">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Promedio</td>
+          <th>{{promedio}}</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Calificar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-sm-7">
+              <label>Materias</label>
+              <select class="form-select" [(ngModel)]="materiaSeleccionada">
+                <option [ngValue]="materia" *ngFor="let materia of materias">{{materia.nombre}}</option>
+              </select>
+            </div>
+
+
+            <div class="col-sm-5">
+              <label>Calificacion</label>
+              <input type="number" class="form-control" [(ngModel)]="calificacion">
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+            (click)="guardarCalificacion()">Calificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar calificacion</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+  
+            <div class="row">
+              <div class="col-sm-7">
+                <label>Materia</label>
+                <input type="text" disabled="true" class="form-control" [(ngModel)]="materiaUpdate">
+              </div>
+  
+  
+              <div class="col-sm-5">
+                <label>Calificacion</label>
+                <input type="number" class="form-control" [(ngModel)]="calificacionUpdate">
+              </div>
+  
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+              (click)="modificarCalificacion()">Calificar</button>
+          </div>
+        </div>
+      </div>
+    </div>
